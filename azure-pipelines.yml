@@ -25,19 +25,19 @@ phases:
     condition: succeededOrFailed()
 
 - phase: 'opencensus_dotnet'
-  queue: 'Hosted Linux Preview'
+  queue: 'Hosted'
   steps:
   - task: UsePythonVersion@0
     inputs:
       versionSpec: '$(python.version)'
       architecture: 'x64'
 
-  - task: DotNetCoreCLI@2
-    displayName: restore packages
-    inputs:
-      command: "restore"
-      projects: "./test/opencensus_dotnet/dotnet.sln"
-      arguments: "-s https://api.nuget.org/v3/index.json -s https://www.myget.org/F/opencensus/api/v3/index.json"
+#  - task: DotNetCoreCLI@2
+#    displayName: restore packages
+#    inputs:
+#      command: "restore"
+#      projects: "./test/opencensus_dotnet/dotnet.sln"
+#      arguments: "-s https://www.myget.org/F/opencensus/api/v3/index.json -s https://api.nuget.org/v3/index.json"
 
   - task: DotNetCoreCLI@2
     displayName: build test app
