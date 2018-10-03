@@ -2,9 +2,6 @@
 variables:
   python.version: '3.6'
 
-pool:
-  vmImage: 'Ubuntu 16.04'
-
 phases:
 
 - phase: 'Self test'
