@@ -23,3 +23,35 @@ phases:
       testResultsFiles: '**/test-results.xml'
       testRunTitle: 'Selftest'
     condition: succeededOrFailed()
+
+- phase: 'opencensus_dotnet'
+  queue: 'Hosted Linux Preview'
+  steps:
+  - task: UsePythonVersion@0
+    inputs:
+      versionSpec: '$(python.version)'
+      architecture: 'x64'
+
+  - task: DotNetCoreCLI@2
+    displayName: restore packages
+    inputs:
+      command: "restore"
+      projects: "./test/opencensus_dotnet/dotnet.sln"
+
+  - task: DotNetCoreCLI@2
+    displayName: build test app
+    inputs:
+      command: "build"
+      projects: "./test/opencensus_dotnet/dotnet.sln"
+      
+  - task: DotNetCoreCLI@2
+    displayName: run app
+    inputs:
+      command: "run"
+      projects: "./test/opencensus_dotnet/dotnet.sln"
+
+  - script: |
+      pip install aiohttp
+      cd ./test
+      python ./test.py "http://localhost:57241/api/Forward"
+    displayName: 'test opencensus python'
