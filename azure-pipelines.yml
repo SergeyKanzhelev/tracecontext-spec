@@ -37,7 +37,7 @@ phases:
     inputs:
       command: "restore"
       projects: "./test/opencensus_dotnet/dotnet.sln"
-      arguments: "--configfile ./test/opencensus_dotnet/NuGet.config"
+      arguments: "-s https://api.nuget.org/v3/index.json -s https://www.myget.org/F/opencensus/api/v3/index.json"
 
   - task: DotNetCoreCLI@2
     displayName: build test app
