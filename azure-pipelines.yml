@@ -37,6 +37,7 @@ phases:
     inputs:
       command: "restore"
       projects: "./test/opencensus_dotnet/dotnet.sln"
+      arguments: "--configfile ./test/opencensus_dotnet/NuGet.config"
 
   - task: DotNetCoreCLI@2
     displayName: build test app
